@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weixin.mapper.DataMapper" >
+
+    <select id="findByOpenId" resultType="com.weixin.model.WeixinUser" parameterType="String">
+        select * from weixin where open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+
+
+    <insert id="addUser" >
+        insert into weixin (phone,username,open_id) VALUES(#{phone},#{username},#{openId})
+    </insert>
+
+    <delete id="deleteUser" >
+        delete from weixin where open_id = #{openId}
+    </delete>
+
+</mapper>
