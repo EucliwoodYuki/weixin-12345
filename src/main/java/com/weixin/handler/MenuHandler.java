@@ -1,6 +1,6 @@
 package com.weixin.handler;
 
-import com.weixin.utils.UrlUtil;
+import com.weixin.utils.OAuthUtil;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -73,7 +73,8 @@ public class MenuHandler extends AbstractHandler {
                 Title="null";
         }
 
-        String url= UrlUtil.getBaseUrl(appId,state);
+        String url= OAuthUtil.getInfoUrl(appId,state);
+
         item.setUrl(url);
         item.setDescription(description);
         item.setPicUrl(PicUrl);
