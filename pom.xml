@@ -51,6 +51,13 @@
             <version>${weixin-java-mp.version}</version>
         </dependency>
 
+        <!--阿里云短信api-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
