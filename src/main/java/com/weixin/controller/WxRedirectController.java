@@ -21,7 +21,7 @@ import static com.weixin.result.ResultFactory.buildSuccessResult;
  */
 @AllArgsConstructor
 @RestController
-@RequestMapping("/wx/app/{appid}")
+@RequestMapping("/wx/app")
 public class WxRedirectController {
     private final WxMpService wxService;
 
@@ -32,10 +32,7 @@ public class WxRedirectController {
     //根据code获取用户信息
     @RequestMapping(value = "/code",produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public Result greetUser(@PathVariable String appid, @RequestParam String code) {
-        if (!this.wxService.switchover(appid)) {
-            throw new IllegalArgumentException(String.format("未找到对应appid=[%s]的配置，请核实！", appid));
-        }
+    public Result greetUser(@RequestParam String code) {
 
         System.out.println("code:::::::" + code);
 
@@ -43,7 +40,7 @@ public class WxRedirectController {
             WxMpOAuth2AccessToken accessToken = wxService.oauth2getAccessToken(code);
             WxMpUser user = wxService.oauth2getUserInfo(accessToken, null);
             //获取数据库用户信息
-            WeixinUser weixinUser=dataService.UserInfo(user.getOpenId());
+            WeixinUser weixinUser=dataService.findByOpenId(user.getOpenId());
             if(weixinUser!=null){
                 return buildSuccessResult(weixinUser);
             }

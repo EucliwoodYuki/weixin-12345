@@ -6,7 +6,7 @@ public interface DataService {
 
 //    public Boolean IsBind(String openId);
 
-    public WeixinUser UserInfo(String openId);
+    public WeixinUser findByOpenId(String openId);
 
     public Boolean addUser(String phone, String username, String openId);
 

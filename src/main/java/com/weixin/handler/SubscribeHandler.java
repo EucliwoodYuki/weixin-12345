@@ -1,6 +1,6 @@
 package com.weixin.handler;
 
-import com.weixin.utils.UrlUtil;
+import com.weixin.utils.OAuthUtil;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -53,7 +53,7 @@ public class SubscribeHandler extends AbstractHandler {
         try {
             WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
             String appId= weixinService.getWxMpConfigStorage().getAppId();
-            String url= UrlUtil.getBaseUrl(appId,"0");
+            String url= OAuthUtil.getBaseUrl(appId,"0");
             item.setUrl(url);
             item.setDescription("欢迎您关注长沙12345市民热线服务微信平台,我们将竭诚为您服务");
             item.setPicUrl("");

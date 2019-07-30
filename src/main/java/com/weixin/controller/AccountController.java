@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.weixin.result.ResultCode.FAIL;
 import static com.weixin.result.ResultCode.SUCCESS;
 import static com.weixin.result.ResultFactory.buidResult;
+import static com.weixin.utils.SmsUtil.sendCode;
 
 @RestController
 @RequestMapping("account")
@@ -26,7 +27,11 @@ public class AccountController {
     @ResponseBody
     public Result accountBind(@RequestParam String phone,
                               @RequestParam String username,
-                              @RequestParam String openid){
+                              @RequestParam String openid,
+                              @RequestParam String code){
+        if(!code.equals(sendCode(phone))){
+            return buidResult(FAIL,"验证码错误",null);
+        }
         Boolean addResult =dataService.addUser(phone,username,openid);
         if(addResult){
             return buidResult(SUCCESS,"绑定成功",null);
@@ -38,7 +43,7 @@ public class AccountController {
     @RequestMapping("info")
     @ResponseBody
     public Result UserInfo(@RequestParam String openid){
-        WeixinUser user=dataService.UserInfo(openid);
+        WeixinUser user=dataService.findByOpenId(openid);
         if(user!=null){
             return buidResult(SUCCESS,"查询成功",user);
         }

@@ -18,7 +18,7 @@ public class DataServiceImpl implements DataService {
 //    }
 
     //查询用户信息
-    public WeixinUser UserInfo(String openId){
+    public WeixinUser findByOpenId(String openId){
         return dataMapper.findByOpenId(openId);
     }
 
